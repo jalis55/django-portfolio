@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+</head>
+<body>
+	{{user.username}}
+	<br>
+	{{user.id}}
+
+	<a href="{% url 'logout_user' %}">Logout</a>
+</body>
+</html>
