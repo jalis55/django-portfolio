@@ -24,6 +24,7 @@ class Education(models.Model):
     degree_name=models.CharField(max_length=50)
     degree_title=models.CharField(max_length=50)
     instituation=models.CharField(max_length=50)
+    about_degree=models.CharField(max_length=300)
 
 class Reviews(models.Model):
     clients_name=models.CharField(max_length=30)

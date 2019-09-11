@@ -1,13 +1,14 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
-from dashboard.models import Skills
+from dashboard.models import Skills,Education
 
 # Create your views here.
 def home(request):
 	skills=Skills.objects.all()
+	educations=Education.objects.all()
 
-	return render(request,'front_end/index.html',{'skills':skills})
+	return render(request,'front_end/index.html',{'skills':skills,'educations':educations})
 	
 
 def login_user(request):

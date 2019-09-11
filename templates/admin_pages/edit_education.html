@@ -1,0 +1,40 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
+  <form id="add_education" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="comment">From-To:</label>
+      <input class="form-control" rows="5" id="from_to" name="from_to"  value="{{edu.from_to}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Degree Name</label>
+      <input type="text" class="form-control" rows="5" id="degree_name" name="degree_name"  value="{{edu.degree_name}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Degree Title</label>
+      <input type="text" class="form-control" rows="5" id="degree_title" name="degree_title"  value="{{edu.degree_title}}" />
+    </div>
+
+    <div class="form-group">
+          <label for="comment">Instituation:</label>
+          <input class="form-control" rows="5" id="instituation" name="instituation"  value="{{edu.instituation}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">About Degree:</label>
+      <textarea class="form-control" rows="5" id="about_degree" name="about_degree" >{{edu.about_degree}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" }}>Update</button>
+  </form>
+</div>
+                       
+
+
+
+
+
+{% endblock %}

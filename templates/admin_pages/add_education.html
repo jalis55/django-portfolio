@@ -1,0 +1,109 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4">
+  <form id="add_education" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="comment">From-To:</label>
+      <input class="form-control" rows="5" id="from_to" name="from_to" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Degree Name</label>
+      <input type="text" class="form-control" rows="5" id="degree_name" name="degree_name" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Degree Title</label>
+      <input type="text" class="form-control" rows="5" id="degree_title" name="degree_title" />
+    </div>
+
+    <div class="form-group">
+          <label for="comment">Instituation:</label>
+          <input class="form-control" rows="5" id="instituation" name="instituation" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">About Degree:</label>
+      <textarea class="form-control" rows="5" id="about_degree" name="about_degree"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add</button>
+  </form>
+</div>
+                       
+<div class="col-lg-6 col-md-6">
+    <h5>Table  Sample Two</h5>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Degree Name</th>
+                    <th>Degree Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for edu in educations %}
+                <tr class="success">
+                    <td>{{edu.degree_name}}</td>
+                    <td>{{edu.degree_title}}</td>
+                    <td><a href="{% url 'edit_education' edu.id %}" id="edit_edu">EDIT</a>|<a href="{% url 'delete_education' edu.id %}">DELETE</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#add_education').submit(function(e){
+                    e.preventDefault(e);
+        $ajax({
+            type:'POST',
+            url:'{% url 'add_education' %}',
+            dataType:"json",
+            data:{
+                from_to:$('#from_to').val(),
+                degree_title:$('#degree_title').val(),
+                degree_name:$('#degree_name').val(),
+                instituation:$('#instituation').val(),
+                about_degree:$('#about_degree').val(),
+                csrfmiddlewartoken:$('input[name=csrfmiddlewaretoken]').val()
+
+            },
+            success:function(resp){
+                alert ("resp: "+resp.name);
+            }
+        });
+
+        });
+
+
+
+
+
+
+    });
+
+</script>
+    <!-- <script>
+        $(document).ready(function(){
+            $('#edit_edu').click(function(){
+                type:'GET',
+                url:'delete-education/{{edu.id}}',
+                success:function(){
+                    alert("done");
+                }
+
+            });
+
+
+        });
+    </script> -->
+
+
+{% endblock %}
