@@ -1,0 +1,66 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4 col-md-offset-4 col-lg-offset-4">
+    <form action="{% url 'add_skills' %}" method="POST" id="add_skills">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" placeholder="Expertise in" id="skill_name" name="skill_name" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="Expertise rating" id="skill_rating" name="skill_rating" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="form-control btn btn-primary" value="Add Skill" />
+        </div>
+</div>
+</form>
+
+<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+    <h5>Skills Details</h5>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+
+                <th>Skills</th>
+                <th>Rating</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for skill in skills %}
+            <tr>
+                <td>{{skill.skill_name}}</td>
+                <td>{{skill.rating}}</td>
+                <td><a href="{% url 'edit_skills' skill.id %}">EDIT</a>|<a href="{% url 'delete_skills' skill.id %}">DELETE</a></td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+
+</div>
+<script>
+    $(document).on('submit', '#add_skills', function(e) {
+        e.preventDefault(e);
+        $ajax({
+            type:'POST',
+            url:'{% url 'add_skills' %}',
+            data:{
+                skill_name:$('#skill_name').val(),
+                skill_rating:$('#skill_rating').val(),
+                csrfmiddlewartoken:$('input[name=csrfmiddlewaretoken]').val()
+
+            },
+            success:function(){
+                alert(data);
+            }
+        });
+
+
+
+    });
+</script>
+
+{% endblock %}

@@ -1,11 +1,14 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
-
+from dashboard.models import Skills
 
 # Create your views here.
 def home(request):
-	return render(request,'front_end/index.html')
+	skills=Skills.objects.all()
+
+	return render(request,'front_end/index.html',{'skills':skills})
+	
 
 def login_user(request):
 	if request.method == 'POST':
