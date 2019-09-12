@@ -47,7 +47,7 @@ def delete_skills(request,id):
 	return redirect('add_skills')
 
 #educations
-
+@login_required(login_url="login_user")
 def add_education(request):
 	if request.method=='POST':
 		from_to=request.POST['from_to']
@@ -69,7 +69,7 @@ def add_education(request):
 		#return HttpResponse(json.dumps({'mes': success}), content_type="application/json")
 	educations=Education.objects.all()
 	return render(request,'admin_pages/add_education.html',{'educations':educations})
-
+@login_required(login_url="login_user")
 def edit_education(request,id):
 	if request.method=='POST':
 		from_to=request.POST['from_to']
@@ -93,7 +93,7 @@ def edit_education(request,id):
 
 	edu=Education.objects.get(id=id)
 	return render(request,'admin_pages/edit_education.html',{'edu':edu})
-
+@login_required(login_url="login_user")
 def delete_education(request,id):
 	#delete educations
 	Education.objects.get(id=id).delete()
@@ -104,7 +104,7 @@ def delete_education(request,id):
 
 
 #work exprience
-
+@login_required(login_url="login_user")
 def add_work_exp(request):
 	if request.method=='POST':
 		from_to=request.POST['from_to']
@@ -121,7 +121,7 @@ def add_work_exp(request):
 			)
 	works=WorkExprience.objects.all()
 	return render(request,'admin_pages/add_work_exp.html',{'works':works})
-
+@login_required(login_url="login_user")
 def edit_work_exp(request,id):
 
 	if request.method=='POST':
@@ -140,7 +140,7 @@ def edit_work_exp(request,id):
 
 	work_exp=WorkExprience.objects.get(id=id)
 	return render(request,'admin_pages/edit_work_exp.html',{'work_exp':work_exp})
-
+@login_required(login_url="login_user")
 def delete_work_exp(request,id):
 	#delete work exprience
 	WorkExprience.objects.get(id=id).delete()
@@ -163,7 +163,7 @@ def add_reviews(request):
 	return render(request,'admin_pages/add_reviews.html',{'reviews':reviews})
 
 
-
+@login_required(login_url="login_user")
 def edit_reviews(request,id):
 	if request.method=='POST':
 		clients_name=request.POST['clients_name']
@@ -180,7 +180,7 @@ def edit_reviews(request,id):
 	review=Reviews.objects.get(id=id)
 	return render(request,'admin_pages/edit_reviews.html',{'review':review})
 
-
+@login_required(login_url="login_user")
 def delete_reviews(request,id):
 	#delete review
 	Reviews.objects.get(id=id).delete()
