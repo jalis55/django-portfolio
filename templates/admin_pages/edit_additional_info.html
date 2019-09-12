@@ -1,0 +1,64 @@
+{% extends 'admin_pages/base.html' %} 
+
+{% block content %}
+
+
+<div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+    <form action="{% url 'edit_additional_info' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-inline">
+            <div class="form-group">
+
+                <input type="text" name="full_name" class="form-control" placeholder="Enter Full Name" value="{{basic_info.full_name}}">
+            </div>
+        </div><br>
+        <div class="form-inline">
+            <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Enter Title Description" value="{{basic_info.title}}">
+            </div>
+        </div><br>
+
+        <div class="form-inline">
+            <div class="form-group">
+                 <input type="hidden" name='id' value="{{basic_info.id}}">
+                <input type="email" name="email" class="form-control input-sm" placeholder="Enter email" value="{{basic_info.email}}">
+            </div>
+            <div class="form-group">
+                <input type="date" name="age" class="form-control input-sm" placeholder="Enter age " value="{{basic_info.age}}">
+            </div>
+        </div>
+        <br>
+        <div class="form-inline">
+            <div class="form-group">
+               
+
+                <input type="text" name="phone" class="form-control input-sm" placeholder="Enter Phone no" value="{{basic_info.phone}}">
+            </div>
+            <div class="form-group">
+                <input type="text" name="languages" class="form-control input-sm" placeholder="Enter language " value="{{basic_info.languages}}">
+            </div>
+        </div>
+        <br>
+        <div class="form-inline">
+            <div class="form-group">
+
+                <input type="text" name="address" class="form-control" placeholder="Enter Address" value="{{basic_info.address}}">
+            </div>
+        </div>
+        <br> About:
+        <div class="form-inline">
+            <div class="form-group">
+
+                <textarea name="about" cols="30" rows="">
+                        {{basic_info.about}}
+                </textarea>
+
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success btn-lg" value="update">
+    </form>
+</div>
+
+
+
+{% endblock %}

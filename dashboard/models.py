@@ -2,13 +2,14 @@ from django.db import models
 
 # Create your models here.
 class BasicInfo(models.Model):
+    full_name=models.CharField(max_length=60)
+    title=models.CharField(max_length=50)
     email = models.CharField(max_length=30)
     age = models.CharField(max_length=30)
     phone = models.CharField(max_length=30)
     address = models.CharField(max_length=200)
     languages = models.CharField(max_length=100)
     about = models.CharField(max_length=500)
-
 class Skills(models.Model):
     skill_name=models.CharField(max_length=40)
     rating=models.IntegerField()

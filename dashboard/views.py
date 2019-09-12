@@ -1,11 +1,84 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.decorators import login_required
-from dashboard.models import Skills,Education,WorkExprience,Reviews
+from dashboard.models import Skills,Education,WorkExprience,Reviews,BasicInfo
 import json
 
 
 
 # Create your views here.
+
+def additional_info(request):
+	if request.method=='POST':
+		full_name=request.POST['full_name']
+		title=request.POST['title']
+		email=request.POST['email']
+		age=request.POST['age']
+		phone=request.POST['phone']
+		address=request.POST['address']
+		languages=request.POST['languages']
+		about=request.POST['about']
+		
+		#add into additional informantion
+		BasicInfo.objects.create(
+
+			full_name=full_name,
+			title=title,
+			email=email,
+			age=age,
+			phone=phone,
+			address=address,
+			languages=languages,
+			about=about,
+			
+			
+
+			)
+		return redirect('admin_home')
+
+	return render(request,'admin_pages/additional_info.html')
+
+
+def edit_additional_info(request):
+	if not BasicInfo.objects.filter().exists():
+		return redirect('additional_info')
+	else:
+		if request.method=='POST':
+			full_name=request.POST['full_name']
+			title=request.POST['title']
+			info_id=request.POST['id']
+			email=request.POST['email']
+			age=request.POST['age']
+			phone=request.POST['phone']
+			address=request.POST['address']
+			languages=request.POST['languages']
+			about=request.POST['about']
+
+			#update Additional info
+			addi_info=BasicInfo.objects.get(id=info_id)
+			addi_info.full_name=full_name
+			addi_info.title=title
+			addi_info.email=email
+			addi_info.age=age
+			addi_info.phone=phone
+			addi_info.address=address
+			addi_info.languages=languages
+			addi_info.about=about
+			addi_info.save()
+
+			return redirect('edit_additional_info')
+
+		basic_info=BasicInfo.objects.get()
+		return render(request,'admin_pages/edit_additional_info.html',{'basic_info':basic_info})
+
+
+
+
+
+
+
+
+
+
 @login_required(login_url="login_user")
 def admin_home(request):
 	return render(request,'admin_pages/home.html')

@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns=[
 	path('',views.admin_home,name='admin_home'),
+
+	#additonal infromation
+	path('add-AddinalInfo',views.additional_info,name='additional_info'),
+	path('edit-AddtionalInfo',views.edit_additional_info,name='edit_additional_info'),
+
 	#skills
 	path('add-skills',views.add_skills,name='add_skills'),
 	path('add-skills/<int:id>',views.edit_skills,name='edit_skills'),

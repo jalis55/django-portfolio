@@ -1,17 +1,18 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
-from dashboard.models import Skills,Education,Reviews,WorkExprience
+from dashboard.models import Skills,Education,Reviews,WorkExprience,BasicInfo
 
 # Create your views here.
 def home(request):
 	skills=Skills.objects.all()
 	educations=Education.objects.all().order_by('-id')
 	reviews=Reviews.objects.all().order_by('-id')[:3]
-	work_exps=WorkExprience.objects.all().order_by('-id')  
+	work_exps=WorkExprience.objects.all().order_by('-id')
+	basic_info=BasicInfo.objects.get()  
 
 	return render(request,'front_end/index.html',{'skills':skills,'educations':educations,'reviews':reviews,\
-		'work_exps':work_exps})
+		'work_exps':work_exps,'basic_info':basic_info})
 
 	
 
