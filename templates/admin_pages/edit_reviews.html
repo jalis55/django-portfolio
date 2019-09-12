@@ -1,0 +1,33 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4">
+  <form action=" {% url 'edit_reviews' review.id %} " method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="comment">Client Name:</label>
+      <input class="form-control" rows="5" id="clients_name" name="clients_name" value="{{review.clients_name}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Organization</label>
+      <input type="text" class="form-control" rows="5" id="organization" name="organization" value="{{review.organization}}" />
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="comment">Review Description</label>
+      <textarea class="form-control" rows="5" id="review_description" name="review_description">{{review.review_description}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add</button>
+  </form>
+</div>
+                       
+
+
+
+
+
+
+{% endblock %}

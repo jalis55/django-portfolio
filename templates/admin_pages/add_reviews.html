@@ -1,0 +1,81 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4">
+  <form id="add_work_exp" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="comment">Client Name:</label>
+      <input class="form-control" rows="5" id="clients_name" name="clients_name" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Organization</label>
+      <input type="text" class="form-control" rows="5" id="organization" name="organization" />
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="comment">Review Description</label>
+      <textarea class="form-control" rows="5" id="review_description" name="review_description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add</button>
+  </form>
+</div>
+                       
+<div class="col-lg-6 col-md-6">
+    <h5>Table  Sample Two</h5>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Organization</th>
+                    <th>Client Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                <tr class="success">
+                    <td>{{review.organization}}</td>
+                    <td>{{review.clients_name}}</td>
+                    <td><a href="{% url 'edit_reviews' review.id %}">EDIT</a>|<a href="{% url 'delete_reviews' review.id %}">DELETE</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#add_work_exp').submit(function(e){
+                    e.preventDefault(e);
+        $ajax({
+            type:'POST',
+            url:'{% url 'add_reviews' %}',
+            dataType:"json",
+            data:{
+                clients_name:$('#clients_name').val(),
+                organization:$('#organization').val(),
+                review_description:$('#review_description').val(),
+                csrfmiddlewartoken:$('input[name=csrfmiddlewaretoken]').val()
+
+            },
+            success:function(resp){
+                alert ("resp: "+resp.name);
+            }
+        });
+
+        });
+
+    });
+
+</script>
+
+
+
+{% endblock %}

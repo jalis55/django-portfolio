@@ -1,0 +1,36 @@
+{% extends 'admin_pages/base.html' %} {% block content %}
+
+
+<div class="col-lg-4 col-md-4">
+  <form action="{% url 'edit_work_exp' work_exp.id %}" id="add_work_exp" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="comment">From-To:</label>
+      <input class="form-control" rows="5" id="from_to" name="from_to" value="{{work_exp.from_to}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Organization</label>
+      <input type="text" class="form-control" rows="5" id="organization" name="organization" value="{{work_exp.organization}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Job Title</label>
+      <input type="text" class="form-control" rows="5" id="job_title" name="job_title" value="{{work_exp.job_title}}" />
+    </div>
+
+
+    <div class="form-group">
+      <label for="comment">Job Description</label>
+      <textarea class="form-control" rows="5" id="job_description" name="job_description">{{work_exp.job_description}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Update</button>
+  </form>
+</div>
+                       
+
+
+
+
+
+{% endblock %}
